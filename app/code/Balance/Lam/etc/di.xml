@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="balanceAddItem" xsi:type="object">Balance\Lam\Console\Command\AddItem</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Balance\Lam\Api\Data\ItemInterface" type="Balance\Lam\Model\Item"/>
+    <preference for="Balance\Lam\Api\ItemRepositoryInterface" type="Balance\Lam\Model\ItemRepository"/>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="balance_items_listing_data_source" xsi:type="string">Balance\Lam\Model\ResourceModel\Item\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="base_tax_amount" xsi:type="string">sales_order.base_tax_amount</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BalanceLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">main</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Magento\Framework\Logger\Handler\System</item>
+                <item name="debug" xsi:type="object">Balance\Lam\Model\DebugHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Balance\Lam\Console\Command\AddItem">
+        <plugin name="console_logging" type="Balance\Lam\Plugin\Logger"/>
+    </type>
+</config>

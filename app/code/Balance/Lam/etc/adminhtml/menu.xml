@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Balance_Lam::balance" title="Balance" module="Balance_Lam" resource="Balance_Lam::balance" translate="title" sortOrder="10" action="balance"/>
+    </menu>
+</config>

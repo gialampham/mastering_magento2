@@ -1,0 +1,7 @@
+<?php
+/** @var \Balance\Lam\Block\Hello $block */
+$listItem = $block->getItems();
+?>
+<?php foreach ($block->getItems() as $item) :?>
+<p><?= $item->getName();?> : <?= $item->getDescription(); ?></p>
+<?php endforeach; ?>
