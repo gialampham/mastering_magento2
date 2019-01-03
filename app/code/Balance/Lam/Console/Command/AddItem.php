@@ -3,6 +3,7 @@
 namespace Balance\Lam\Console\Command;
 
 use Magento\Framework\Console\Cli;
+use Magento\Framework\Event\ManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Balance\Lam\Model\ItemFactory;
@@ -30,17 +31,25 @@ class AddItem extends Command
     protected $logger;
 
     /**
+     * @var \Magento\Framework\Event\ManagerInterface
+     */
+    protected $eventManager;
+
+    /**
      * AddItem constructor.
      *
-     * @param \Balance\Lam\Model\ItemFactory $itemFactory
-     * @param \Psr\Log\LoggerInterface       $logger
+     * @param \Balance\Lam\Model\ItemFactory            $itemFactory
+     * @param \Psr\Log\LoggerInterface                  $logger
+     * @param \Magento\Framework\Event\ManagerInterface $manager
      */
     public function __construct(
         ItemFactory $itemFactory,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        ManagerInterface $manager
     ) {
         $this->itemFactory = $itemFactory;
         $this->logger = $logger;
+        $this->eventManager = $manager;
         parent::__construct();
     }
 
@@ -77,7 +86,10 @@ class AddItem extends Command
         $item->setDescription($input->getArgument(self::XML_DESCRIPTION));
         $item->setIsObjectNew(true);
         $item->save();
-        $this->logger->debug('Item was created!');
+//        dispatch event
+//        $this->eventManager->dispatch('balance_command', ['object'=>$item]);
+//        logger with di
+//        $this->logger->debug('Item was created!');
         return Cli::RETURN_SUCCESS;
     }
 }

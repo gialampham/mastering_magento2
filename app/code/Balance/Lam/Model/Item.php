@@ -10,6 +10,8 @@ use Magento\Framework\Model\AbstractModel;
  */
 class Item extends AbstractModel
 {
+    // define prefix event when save item --- save after, save before
+    protected $_eventPrefix = 'balance_sample_item';
     /**
      * @var
      */

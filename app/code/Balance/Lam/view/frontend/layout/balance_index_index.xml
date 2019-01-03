@@ -2,7 +2,12 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block class="Balance\Lam\Block\Hello" name="balance_lam_hello" template="hello.phtml"/>
+            <block class="Balance\Lam\Block\Hello" name="balance_lam_hello" template="hello.phtml">
+                <arguments>
+                    <argument name="title" xsi:type="string">Balance Internet</argument>
+                </arguments>
+            </block>
         </referenceContainer>
+        <referenceBlock name="form.subscribe" remove="true"/>
     </body>
 </page>
